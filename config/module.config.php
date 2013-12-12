@@ -657,7 +657,7 @@ return array(
             'max' => 'int',
         ),
         'notempty' => array(
-            'type' => int,
+            'type' => 'int',
         ),
         'regex' => array(
             'pattern' => 'string',
