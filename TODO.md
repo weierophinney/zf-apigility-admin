@@ -321,3 +321,39 @@ Admin UI Improvements
     - [ ] Potentially allow toggling; clicking on a disabled one would also enable
       that method for the service.
         - column/row toggles should never do this, however!
+
+Issue #247: per-API authentication
+----------------------------------
+
+On first load:
+
+- [ ] If authentication is setup (`DefaultAuthenticationListener` has a single
+  adapter) AND no `map` configuration setup:
+  - [ ] Get the authentication type provided from the listener
+  - [ ] Get the list of services and versions
+  - [ ] Create the map; each service/version pair maps to the configured type
+
+Create/configure adapter:
+
+- [ ] Make sure it merges, not replaces, the configuration
+
+Get list of supported authentication types:
+
+This one needs to be revised; currently, it will return configuration for one
+style of authentication only, based on opportunistic fetching (either HTTP or
+OAuth2, but not both). 
+
+- [ ] GET `/authentication`: return list of authentication types, keyed by type.
+  This will need a new version modifier: `application/vnd.apigility.authentication.v2+json`.
+
+Per-API authentication setup:
+
+- [ ] GET `module/:name/authentication[?version=:version`: return the configured
+  authentication for the given module and version; returned as an object with
+  the key "authentication_type" and value, if any.
+- [ ] PUT `/module/:name/authentication`: add/replace the given authentication
+  type for the given module at the latest version of the module.
+- [ ] DELETE `/module/:name/authentication`: remove authentication
+  for the given module at the latest version of the module
+
+PUT accepts `"authentication_type": "named type"`.
