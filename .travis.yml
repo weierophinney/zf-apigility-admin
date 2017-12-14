@@ -34,6 +34,7 @@ matrix:
     - php: 7
       env:
         - DEPS=locked
+        - ALTERNATE_DEPS="phpunit/phpunit"
         - EXT_MONGODB=true
         - CS_CHECK=true
     - php: 7
