@@ -81,6 +81,7 @@ notifications:
   email: false
 
 before_install:
+  - echo "TRAVIS_PHP_VERSION is '$TRAVIS_PHP_VERSION'"
   - if [[ $TEST_COVERAGE != 'true' && "$(php --version | grep xdebug -ci)" -ge 1 ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
   - if [[ $EXT_MONGODB == 'true' && $TRAVIS_PHP_VERSION =~ '^7' ]]; then echo "Enabling mongodb extension"; echo "extension = mongodb.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; fi
   - if [[ $EXT_MONGODB == 'true' && $TRAVIS_PHP_VERSION == 'hhvm' ]]; then echo "Enabling mongodb extension"; echo "extension = mongodb.so" >> /etc/hhvm/php.ini ; fi
