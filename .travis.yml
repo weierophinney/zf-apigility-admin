@@ -78,7 +78,7 @@ before_install:
 
 install:
   - travis_retry composer install $COMPOSER_ARGS --ignore-platform-reqs
-  - if [[ $ALTERNATE_DEPS ~= '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $ALTERNATE_DEPS ; fi
+  - if [[ $ALTERNATE_DEPS != '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $ALTERNATE_DEPS ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
   - if [[ $EXT_MONGODB == 'true' ]]; then composer require --dev $COMPOSER_ARGS alcaeus/mongo-php-adapter ; fi
